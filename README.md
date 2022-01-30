@@ -19,7 +19,7 @@ Main Function
 Handle Connection
 =============
 <p>In my structure, there are 4 types messages that an ATM would receive:<br />
-1. A <mark>REQUEST</mark> message: for which it should push the received event into its own priority queue and send propose back to sender <br />
+1. A <strong>REQUEST</strong> message: for which it should push the received event into its own priority queue and send propose back to sender <br />
 2. A PROPOSE message: when an ATM receive a PROPOSE message, it would than compare the received priority with its own priority and if the received one is larger, update that in the priority queue. Moreover, it would go through a Propose map to see if this message has received all the proposes from other ATMs. Suppose we now have received all the propose messages and the event is at the head of the priority queue, we would set this message to deliverable and update the balance array. At last we multicast AGREE message and pop the consecutive deliverable events from the queue.<br />
 3. An AGREE message: when an ATM receive an AGREE message, it would then update the priority of the event in the priority queue and also pop all the consecutive deliverable events if the first event in the queue is deliverable.<br />
 4. A BROKEN message: when an ATM receive a BROKEN message, it would then set the corresponding ATM to false in the “isAlive” array and won’t wait for the propose from this ATM anymore. Besides this, it would also pop out all the events that were sent from the broken ATM so that the priority queue would not be stuck.<br /></p>
